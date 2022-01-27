@@ -9,6 +9,7 @@ df['Val2'] = df['Val2'].replace(0,'')
 df = df.fillna('')
 df['Addr'] = df['Address'].astype('str') + ' ' + df['Val1'].astype('str') + ' ' + df['Val2'].astype('str')
 
+text = pd.read_csv("australian_post_codes.txt", sep=',')
 #Create dictionary to store postcode and state code as key-value pair
 post_state_codes = dict(zip(text['postcode'].astype(str), text['state_code']))
 #Create dictionary to store place + state and postcode code as key-value pair
@@ -17,7 +18,6 @@ place_post_codes = dict(zip((text['place_name'] + ' ' + text['state_code']), tex
 state_codes = set(text['state_code'])
 postcodes = set(text['postcode'])
 
-outfile = open("new_file.csv","w")
 
 #function to map and add the required place, state and post codes to a new column
 def funcheck(sample):
